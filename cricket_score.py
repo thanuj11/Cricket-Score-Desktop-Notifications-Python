@@ -28,8 +28,8 @@ def cricket_score_scraping():
             scores_ind=i.find('.cscore_score ')
             scores_individual.extend(scores_ind)
 
-    print(len(scores_list))
-    print(len(scores_individual))
+    #print(len(scores_list))
+    #print(len(scores_individual))
 
     dic=dict()
 
@@ -37,7 +37,7 @@ def cricket_score_scraping():
         if i<=7:
             dic[scores_list[i].text]=scores_individual[i].text
 
-    print(dic)
+    #print(dic)
     ICON_PATH = "cricket.ico"
     toaster = ToastNotifier()
     string=''
