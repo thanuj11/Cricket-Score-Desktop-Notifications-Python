@@ -18,6 +18,7 @@ def cricket_score_scraping():
 
     scores_list=[]
     scores_individual=[]
+    scores_news=[]
     
     for i in scores:
         if i.find('.cscore_name--long'):
@@ -27,6 +28,11 @@ def cricket_score_scraping():
         if i.find('.cscore_score '):
             scores_ind=i.find('.cscore_score ')
             scores_individual.extend(scores_ind)
+        if i.find('.cscore_commentary--footer'):
+            for j in i.find('.cscore_commentary--footer'):
+                if j.find('.cscore_notes_game'):
+                    scores_news1=j.find('.cscore_notes_game')
+                    scores_news.extend(scores_news1)
 
     #print(len(scores_list))
     #print(len(scores_individual))
@@ -42,16 +48,19 @@ def cricket_score_scraping():
     toaster = ToastNotifier()
     string=''
     count=0
+    news_count=0
     for i,j in dic.items():
         count=count+1
 
         string += str(i) + " "+ str(j) + "\n"
         if count==2:
+            string+=scores_news[news_count].text
             toaster.show_toast("scores",
                            string,
                            icon_path=ICON_PATH,
                            duration=2)
             count=0
+            news_count=news_count+1
             string=''
 
 if __name__=="__main__":
